@@ -8,7 +8,7 @@ export default function Home() {
 
     return(
         <> 
-        好想睡 {counter} 覺
+        好想睡 {} 覺
         </>
     )
 
