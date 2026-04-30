@@ -1,0 +1,17 @@
+"use client"
+
+import Link from "next/link";
+import { useState, useEffect } from "react";
+
+export default function prepare() {
+
+  return(
+    <>
+    <div className="flex flex-col justify-center items-center gap-4">
+    準備
+      <Link className="text-black bg-white px-3 py-2" href="result">看結果</Link>
+    </div> 
+    </>
+  )
+
+}
