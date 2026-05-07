@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
+import {usePsyDataStore} from "../../store/store"
 
 export default function test() {
 
+  const PsyData = usePsyDataStore((state) => state);
   const router = useRouter();
 
   let TestData = [
