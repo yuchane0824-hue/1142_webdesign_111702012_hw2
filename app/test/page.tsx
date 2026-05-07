@@ -2,82 +2,30 @@
 
 import Link from "next/link";
 import { useRouter } from 'next/navigation'
-import { useState } from "react";
-import {usePsyDataStore} from "../../store/store"
+import { useState, useEffect } from "react";
+import { usePsyStore } from "../../store/store.js"
 
-export default function test() {
-
-  const PsyData = usePsyDataStore((state) => state);
+export default function Test() {
   const router = useRouter();
+  const [TestIndex, setTestIndex] = useState(0);
 
-  let TestData = [
-    {
-      title: "題目一", 
-      options:[
-        {
-          text: "選項一",
-          value: 1
-        },
+  const PsyData = usePsyStore((state: { PsyData: any; }) => state.PsyData);
+  const setScore = usePsyStore((state: { setScore: any; }) => state.setScore);
 
-        {
-          text: "選項二",
-          value: 2
-        },
+  console.log(PsyData);
+  console.log(PsyData.quizData);
 
-        {
-          text: "選項三",
-          value: 3
-        }
-      ]
-    },
+  useEffect(() => {
+    console.log("目前分數" + PsyData.score);
+  }, [PsyData.score]);
 
-    {
-      title: "題目二", 
-      options:[
-        {
-          text: "選項一",
-          value: 1
-        },
-
-        {
-          text: "選項二",
-          value: 2
-        },
-
-        {
-          text: "選項三",
-          value: 3
-        }
-      ]
-    },
-
-    {
-      title: "題目三", 
-      options:[
-        {
-          text: "選項一",
-          value: 1
-        },
-
-        {
-          text: "選項二",
-          value: 2
-        },
-
-        {
-          text: "選項三",
-          value: 3
-        }
-      ]
-    }
-  ];
-
- const [TestIndex, setTestIndex] = useState(0);
-
-  function next(optionIndex: number){
+  function next(optionIndex: any){
     console.log("使用者選擇：" + optionIndex);
 
-    if( TestIndex < TestData.length - 1 ){      
+    setScore(PsyData.score + PsyData.quizData[TestIndex].options[optionIndex].value);
+    console.log(PsyData.score);
+
+    if( TestIndex != PsyData.quizData.length - 1 ){      
       console.log("下一題");
       setTestIndex( TestIndex + 1 );
     }else{
@@ -93,10 +41,10 @@ export default function test() {
 
     <div>
       <div>
-        <div>{ "Q" + (TestIndex + 1) + "." + TestData[TestIndex].title }</div>
-        <div onClick={()=>next(0)}> { TestData[TestIndex].options[0].text } </div>
-        <div onClick={()=>next(1)}> { TestData[TestIndex].options[1].text } </div>
-        <div onClick={()=>next(2)}> { TestData[TestIndex].options[2].text } </div>
+        <div>{ "Q" + (TestIndex + 1) + "." + PsyData.quizData[TestIndex].title }</div>
+        <div onClick={()=>next(0)}> { PsyData.quizData[TestIndex].options[0].text } </div>
+        <div onClick={()=>next(1)}> { PsyData.quizData[TestIndex].options[1].text } </div>
+        <div onClick={()=>next(2)}> { PsyData.quizData[TestIndex].options[2].text } </div>
       </div>
     </div>
 
@@ -106,5 +54,4 @@ export default function test() {
     </div> 
     </>
   )
-
 }
