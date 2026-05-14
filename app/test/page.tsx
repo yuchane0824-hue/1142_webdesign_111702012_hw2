@@ -42,9 +42,10 @@ export default function Test() {
     <div>
       <div>
         <div>{ "Q" + (TestIndex + 1) + "." + PsyData.quizData[TestIndex].title }</div>
-        <div onClick={()=>next(0)}> { PsyData.quizData[TestIndex].options[0].text } </div>
-        <div onClick={()=>next(1)}> { PsyData.quizData[TestIndex].options[1].text } </div>
-        <div onClick={()=>next(2)}> { PsyData.quizData[TestIndex].options[2].text } </div>
+        {
+          PsyData.quizData[TestIndex].options.map(
+            (option: any, index: number) => <div onClick={() => next(index)}>{option.text}</div>)
+        }
       </div>
     </div>
 

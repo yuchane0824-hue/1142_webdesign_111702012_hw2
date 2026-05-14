@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import build from "@/component/Button";  
+import Button from "@/component/Button";
 
 export default function Home() {
 
@@ -20,7 +21,9 @@ export default function Home() {
       <>
       <div className="flex flex-col justify-center items-center gap-4">
         歡迎
-        <Link className="text-black bg-white px-3 py-2" href="test">開始</Link>
+        <Button>
+          <Link className="text-black bg-black px-3 py-2" href="test">開始</Link>
+        </Button>
       </div> 
       </>
     )
